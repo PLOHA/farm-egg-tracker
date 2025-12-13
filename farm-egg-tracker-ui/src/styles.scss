@@ -1,0 +1,85 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define a Dark/Neon Palette (Cyberpunk inspired)
+// Primary: Neon Cyan
+$neon-primary: mat.m2-define-palette(mat.$m2-cyan-palette, A200, A100, A400);
+
+// Accent: Electric Purple
+$neon-accent: mat.m2-define-palette(mat.$m2-deep-purple-palette, A200, A100, A400);
+
+$my-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Dark Theme Configuration
+$my-theme: mat.m2-define-dark-theme((color: (primary: $neon-primary,
+        accent: $neon-accent,
+        warn: $my-warn,
+      ),
+      typography: mat.m2-define-typography-config($font-family: 'Outfit, "Helvetica Neue", sans-serif',
+      ),
+      density: 0,
+    ));
+
+@include mat.all-component-themes($my-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', "Helvetica Neue", sans-serif;
+
+  // Animated Deep Space Background
+  background-color: #05070a;
+  background-image:
+    radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 3px),
+    radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 2px),
+    radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 0 0, 0 0;
+
+  animation: space-pan 20s linear infinite;
+
+  color: #e2e8f0; // Off-white text for readability
+  overflow-x: hidden;
+}
+
+@keyframes space-pan {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 550px 0, 350px 0, 250px 0;
+  }
+}
+
+// Global Glassmorphism helper
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+}
+
+// Scrollbar styling for cool factor
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22d3ee;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}

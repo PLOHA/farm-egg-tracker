@@ -1,0 +1,115 @@
+<div class="dashboard-container">
+
+  <mat-card class="filter-card">
+    <mat-card-header>
+      <div class="header-content">
+        <h1 class="app-title">🐔 Farm Egg Tracker</h1>
+        <p class="sub-title">ตัวเลือกเรียกดูรายงาน</p>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="filter-controls">
+        <!-- Toggle Type -->
+        <mat-form-field appearance="fill">
+          <mat-label>ประเภทรายงาน</mat-label>
+          <mat-select [(ngModel)]="reportType" (selectionChange)="onTypeChange($event.value)">
+            <mat-option value="daily">รายวัน</mat-option>
+            <mat-option value="monthly">รายเดือน</mat-option>
+            <mat-option value="yearly">รายปี</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Daily Filter -->
+        <mat-form-field appearance="fill" *ngIf="reportType === 'daily'">
+          <mat-label>เลือกวันที่</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="loadData()">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Monthly/Yearly Filter -->
+        <mat-form-field appearance="fill" *ngIf="reportType !== 'daily'">
+          <mat-label>เลือกปี</mat-label>
+          <mat-select [(ngModel)]="selectedYear" (selectionChange)="loadData()">
+            <mat-option *ngFor="let y of years" [value]="y">{{y}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="reportType === 'monthly'">
+          <mat-label>เลือกเดือน</mat-label>
+          <mat-select [(ngModel)]="selectedMonth" (selectionChange)="loadData()">
+            <mat-option *ngFor="let m of months" [value]="m.val">{{m.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="loadData()">
+          <mat-icon>refresh</mat-icon> โหลดข้อมูล
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Summary Reactor (Total) -->
+  <div class="summary-container" *ngIf="reportData">
+    <div class="reactor-core">
+      <div class="reactor-ring"></div>
+      <div class="reactor-content">
+        <div class="reactor-label">รวมทั้งหมด</div>
+        <div class="reactor-value">{{ reportData.totalEggs }}</div>
+        <div class="reactor-unit">ฟอง</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-container mat-elevation-z8" *ngIf="reportData">
+    <table mat-table
+      [dataSource]="reportType === 'daily' ? reportData.breakdown : (reportType === 'monthly' ? reportData.dailyBreakdown : reportData.monthlyBreakdown)">
+
+      <!-- Dynamic Columns -->
+      <ng-container matColumnDef="name" *ngIf="reportType === 'daily'">
+        <th mat-header-cell *matHeaderCellDef> สัตว์ </th>
+        <td mat-cell *matCellDef="let element"> {{element.animalType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="animalType" *ngIf="reportType === 'daily'">
+        <th mat-header-cell *matHeaderCellDef> สัตว์ </th>
+        <td mat-cell *matCellDef="let element"> {{element.animalType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="count" *ngIf="reportType === 'daily'">
+        <th mat-header-cell *matHeaderCellDef> จำนวน (ฟอง) </th>
+        <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date" *ngIf="reportType === 'monthly'">
+        <th mat-header-cell *matHeaderCellDef> วันที่ </th>
+        <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="monthName" *ngIf="reportType === 'yearly'">
+        <th mat-header-cell *matHeaderCellDef> เดือน </th>
+        <td mat-cell *matCellDef="let element"> {{element.monthName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="chickenCount" *ngIf="reportType !== 'daily'">
+        <th mat-header-cell *matHeaderCellDef> ไข่ไก่ </th>
+        <td mat-cell *matCellDef="let element"> {{element.chickenCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="duckCount" *ngIf="reportType !== 'daily'">
+        <th mat-header-cell *matHeaderCellDef> ไข่เป็ด </th>
+        <td mat-cell *matCellDef="let element"> {{element.duckCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total" *ngIf="reportType !== 'daily'">
+        <th mat-header-cell *matHeaderCellDef> รวม </th>
+        <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,64 @@
+.farm-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 80%);
+}
+
+// Sun removed
+
+// Clouds removed
+
+.land {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 250px;
+}
+
+.hill {
+    position: absolute;
+    border-radius: 50% 50% 0 0;
+}
+
+.hill-1 {
+    width: 120%;
+    height: 250px;
+    background: #66BB6A;
+    bottom: -50px;
+    left: -10%;
+    z-index: 2;
+}
+
+.hill-2 {
+    width: 120%;
+    height: 300px;
+    background: #81C784;
+    bottom: -80px;
+    right: -20%;
+    z-index: 1;
+}
+
+.hill-3 {
+    width: 100%;
+    height: 150px;
+    background: #43A047;
+    bottom: -20px;
+    left: 20%;
+    z-index: 3;
+}
+
+.ground-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    z-index: 10;
+}
+
+// Animals and Eggs styles removed

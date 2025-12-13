@@ -1,0 +1,270 @@
+// Variables
+$neon-cyan: #22d3ee;
+$neon-purple: #c084fc;
+$glass-bg: rgba(20, 20, 30, 0.2); // More transparent, slightly dark to keep text readable
+$glass-border: 1px solid rgba(255, 255, 255, 0.08);
+
+.dashboard-container {
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// Override Toolbar for Transparent Look
+:host ::ng-deep .mat-toolbar {
+  background: transparent !important;
+  color: $neon-cyan !important;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: $glass-border;
+  backdrop-filter: blur(4px); // Reduced blur to see movement
+  top: 0;
+  z-index: 100;
+
+  span {
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+  }
+}
+
+// Filter Card - Frosted Glass
+.filter-card {
+  margin-bottom: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02); // Very sheer
+  border: $glass-border;
+  backdrop-filter: blur(5px); // See stars moving behind
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: white;
+
+  mat-card-header {
+    justify-content: center;
+    margin-bottom: 30px;
+
+    .header-content {
+      text-align: center;
+
+      .app-title {
+        font-size: 2.5rem;
+        margin: 0;
+        color: $neon-cyan;
+        font-weight: 700;
+        text-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+        letter-spacing: 1px;
+      }
+
+      .sub-title {
+        margin: 5px 0 0;
+        font-size: 1rem;
+        color: $neon-purple;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        opacity: 0.9;
+        position: relative;
+        display: inline-block;
+
+        // Add cool lines on side
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          width: 30px;
+          height: 1px;
+          background: $neon-purple;
+          opacity: 0.5;
+        }
+
+        &::before {
+          right: 100%;
+          margin-right: 15px;
+        }
+
+        &::after {
+          left: 100%;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+
+  mat-card-content {
+    padding-top: 24px;
+  }
+
+  .filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+
+    // Custom coloring for inputs to fit dark theme
+    mat-form-field {
+      width: 250px;
+
+      ::ng-deep .mdc-text-field {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        border-radius: 12px;
+        color: white;
+      }
+
+      ::ng-deep .mat-mdc-form-field-icon-prefix,
+      ::ng-deep .mat-mdc-select-value,
+      ::ng-deep .mat-mdc-select-arrow {
+        color: #e2e8f0;
+      }
+    }
+
+    button {
+      height: 56px;
+      background: linear-gradient(135deg, $neon-cyan 0%, #0ea5e9 100%);
+      color: #0f172a; // Dark text on bright button
+      font-weight: 700;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
+      }
+    }
+  }
+}
+
+// Summary Reactor - The Core of the Dashboard
+.summary-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: -20px;
+
+  .reactor-core {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    // Glass Core Background
+    background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, rgba(15, 23, 42, 0.4) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    box-shadow: 0 0 30px rgba(192, 132, 252, 0.2);
+
+    // Spinning Outer Ring
+    .reactor-ring {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      border: 2px dashed rgba(34, 211, 238, 0.3);
+      border-top-color: $neon-cyan;
+      border-bottom-color: $neon-purple;
+      animation: spin-ring 10s linear infinite;
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+    }
+
+    .reactor-content {
+      text-align: center;
+      z-index: 2;
+
+      .reactor-label {
+        font-size: 1rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+      }
+
+      .reactor-value {
+        font-size: 5rem;
+        font-weight: 700;
+        line-height: 1;
+        background: linear-gradient(180deg, #fff, $neon-cyan);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.6));
+      }
+
+      .reactor-unit {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 5px;
+      }
+    }
+
+    // Hover Effect
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(192, 132, 252, 0.4);
+
+      .reactor-ring {
+        border-color: $neon-cyan;
+        animation-duration: 5s;
+      }
+    }
+  }
+}
+
+@keyframes spin-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Data Table - Sexy Dark Mode Table
+.table-container {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border: $glass-border;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+
+  table {
+    width: 100%;
+    background: transparent;
+
+    th {
+      background: rgba(0, 0, 0, 0.3);
+      color: $neon-cyan;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      color: #e2e8f0;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+    }
+
+    tr.mat-row {
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}
+
+// Spacer
+.example-spacer {
+  flex: 1 1 auto;
+}
