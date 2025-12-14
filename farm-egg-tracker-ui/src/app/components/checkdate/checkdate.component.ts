@@ -24,6 +24,10 @@ export class CheckdateComponent {
         this.router.navigate(['/dashboard']);
     }
 
+    navigateToMultiplicationTable() {
+        this.router.navigate(['/multiplication-table']);
+    }
+
     checkYear() {
         if (!this.inputYear) {
             this.resultMessage = 'กรุณากรอกตัวเลขปี';

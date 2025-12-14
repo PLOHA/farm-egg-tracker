@@ -2,8 +2,12 @@
 
     <div class="action-buttons-container" style="display: flex; justify-content: flex-start; margin-bottom: 20px;">
         <button mat-raised-button (click)="navigateToDashboard()"
-            style="padding: 10px 25px; font-size: 1rem; border-radius: 50px; background-color: rgba(255,255,255,0.1); color: white;">
+            style="padding: 10px 25px; font-size: 1rem; border-radius: 50px; background-color: rgba(255,255,255,0.1); color: white; margin-right: 15px;">
             <mat-icon>arrow_back</mat-icon> Back to Dashboard
+        </button>
+        <button mat-raised-button color="warn" (click)="navigateToMultiplicationTable()"
+            style="padding: 10px 25px; font-size: 1rem; border-radius: 50px;">
+            <mat-icon>calculate</mat-icon> Multiplication Table
         </button>
     </div>
 

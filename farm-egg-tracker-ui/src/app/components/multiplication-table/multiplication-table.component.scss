@@ -1,0 +1,117 @@
+// Variables
+$neon-cyan: #22d3ee;
+$neon-purple: #c084fc;
+$neon-green: #4ade80;
+$dark-bg: #0f172a;
+$glass-border: 1px solid rgba(255, 255, 255, 0.08);
+
+.table-page-container {
+    padding: 40px 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    color: #e2e8f0;
+
+    .action-buttons-container {
+        margin-bottom: 20px;
+    }
+
+    .header-section {
+        text-align: center;
+        margin-bottom: 40px;
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: $neon-purple;
+            text-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            color: #94a3b8;
+        }
+    }
+
+    .tables-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        padding-bottom: 40px;
+
+        .table-card-wrapper {
+            .table-card {
+                background: rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(10px);
+                border: $glass-border;
+                border-radius: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+                overflow: hidden;
+
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 30px rgba(192, 132, 252, 0.2);
+                    border-color: rgba(192, 132, 252, 0.3);
+
+                    .card-title {
+                        color: white;
+                        text-shadow: 0 0 10px $neon-cyan;
+                    }
+                }
+
+                mat-card-header {
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 15px;
+                    justify-content: center;
+
+                    .card-title {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                        color: $neon-cyan;
+                        transition: all 0.3s ease;
+                    }
+                }
+
+                mat-card-content {
+                    padding: 20px;
+
+                    .table-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 8px 0;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                        font-size: 1.1rem;
+                        font-family: 'Space Mono', monospace; // Or fallback to monospace
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        .operand {
+                            color: #94a3b8;
+                            width: 25px;
+                            text-align: center;
+                        }
+
+                        .operator,
+                        .equals {
+                            color: rgba(255, 255, 255, 0.3);
+                        }
+
+                        .result {
+                            color: $neon-green;
+                            font-weight: 700;
+                            width: 40px;
+                            text-align: right;
+                            text-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

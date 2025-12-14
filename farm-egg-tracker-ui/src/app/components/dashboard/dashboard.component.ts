@@ -44,6 +44,10 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/checkdate']);
     }
 
+    navigateToMultiplicationTable() {
+        this.router.navigate(['/multiplication-table']);
+    }
+
     // Filter Values
     selectedDate: Date = new Date();
     selectedYear: number = new Date().getFullYear();
