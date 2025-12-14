@@ -1,9 +1,9 @@
+https://drive.google.com/drive/folders/1P-SoRPQ0mOFSJ1trifmnWzcojYfo-F_2?usp=sharing
+คลิปสั้นรีวิวฟังชั่นต่างๆ 
+
 # 🐔 Farm Egg Tracker
 
 A modern, high-tech web application for tracking chicken and duck egg production on your farm. This project features a stunning **Space/Glassmorphism UI** with animated backgrounds and neon effects.
-
-![Application Screenshot](https://github.com/PLOHA/farm-egg-tracker/raw/main/screenshot.png)
-*(Note: You can add a screenshot here later)*
 
 ## ✨ Features
 
