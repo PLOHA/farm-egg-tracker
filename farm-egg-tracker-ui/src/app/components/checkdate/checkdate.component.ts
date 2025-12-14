@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     styleUrl: './checkdate.component.scss'
 })
 export class CheckdateComponent {
-    inputYear: number | null = null;
+    inputDate: string = '';
     resultMessage: string = '';
     isBe: boolean = false;
     private router = inject(Router);
@@ -29,21 +29,36 @@ export class CheckdateComponent {
     }
 
     checkYear() {
-        if (!this.inputYear) {
-            this.resultMessage = 'กรุณากรอกตัวเลขปี';
+        if (!this.inputDate) {
+            this.resultMessage = 'กรุณากรอกวันที่';
             return;
         }
 
-        if (this.inputYear > 2400) {
+        // Simple validation or extraction (assuming DD/MM/YYYY format)
+        const parts = this.inputDate.split('/');
+        if (parts.length !== 3) {
+            this.resultMessage = 'รูปแบบวันที่ไม่ถูกต้อง (ตัวอย่าง: 01/07/2568)';
+            return;
+        }
+
+        const yearStr = parts[2];
+        const inputYear = parseInt(yearStr, 10);
+
+        if (isNaN(inputYear)) {
+            this.resultMessage = 'ปีไม่ถูกต้อง';
+            return;
+        }
+
+        if (inputYear > 2400) {
             // Logic: BE (พ.ศ.)
-            const ceYear = this.inputYear - 543;
+            const ceYear = inputYear - 543;
             this.isBe = true;
-            this.resultMessage = `ปีที่คุณส่งมาคือ ปีแบบพุทธศักราช (พ.ศ.) ตรงกับ ค.ศ. ${ceYear}`;
+            this.resultMessage = `วันที่คุณส่งมาคือ ปีแบบพุทธศักราช (พ.ศ.) ตรงกับ ค.ศ. ${ceYear}`;
         } else {
             // Logic: CE (ค.ศ.)
-            const beYear = this.inputYear + 543;
+            const beYear = inputYear + 543;
             this.isBe = false;
-            this.resultMessage = `ปีที่คุณส่งมาคือ ปีแบบคริสต์ศักราช (ค.ศ.) ตรงกับ พ.ศ. ${beYear}`;
+            this.resultMessage = `วันที่คุณส่งมาคือ ปีแบบคริสต์ศักราช (ค.ศ.) ตรงกับ พ.ศ. ${beYear}`;
         }
     }
 }

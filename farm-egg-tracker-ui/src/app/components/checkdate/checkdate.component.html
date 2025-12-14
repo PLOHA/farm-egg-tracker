@@ -22,8 +22,9 @@
         <mat-card-content>
             <div class="input-section">
                 <mat-form-field appearance="fill" class="year-input">
-                    <mat-label>กรอกปี (เช่น 1997 หรือ 2568)</mat-label>
-                    <input matInput type="number" [(ngModel)]="inputYear" (keydown.enter)="checkYear()">
+                    <mat-label>กรอกวันที่ (เช่น 01/07/2568)</mat-label>
+                    <input matInput type="text" [(ngModel)]="inputDate" (keydown.enter)="checkYear()"
+                        placeholder="DD/MM/YYYY">
                 </mat-form-field>
 
                 <button mat-raised-button color="accent" (click)="checkYear()">
