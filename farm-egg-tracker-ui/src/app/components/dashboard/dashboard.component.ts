@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { ReportService } from '../../services/report.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -35,8 +36,13 @@ import { ReportService } from '../../services/report.service';
 })
 export class DashboardComponent implements OnInit {
     private reportService = inject(ReportService);
+    private router = inject(Router);
 
     reportType: 'daily' | 'monthly' | 'yearly' = 'daily';
+
+    navigateToCheckDate() {
+        this.router.navigate(['/checkdate']);
+    }
 
     // Filter Values
     selectedDate: Date = new Date();
