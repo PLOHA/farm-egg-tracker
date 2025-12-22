@@ -1,5 +1,5 @@
 https://drive.google.com/drive/folders/1P-SoRPQ0mOFSJ1trifmnWzcojYfo-F_2?usp=sharing
-คลิปสั้นรีวิวฟังชั่นต่างๆ 
+คลิปสั้นรีวิวฟังชั่นต่างๆ / Short clip preview
 
 # 🐔 Farm Egg Tracker
 
